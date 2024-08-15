@@ -20,6 +20,7 @@ import (
 	"fmt"
 
 	"github.com/NVIDIA/go-dcgm/pkg/dcgm"
+	"github.com/sirupsen/logrus"
 )
 
 // FieldEntityGroupTypeToMonitor supported entity group types
@@ -65,7 +66,7 @@ func NewEntityGroupTypeSystemInfo(c []Counter, config *Config) *FieldEntityGroup
 // Load loads SystemInfo for a provided Field_Entity_Group
 func (e *FieldEntityGroupTypeSystemInfo) Load(entityType dcgm.Field_Entity_Group) error {
 	var deviceFields = NewDeviceFields(e.counters, entityType)
-
+	logrus.Debugf("Check device %d", entityType)
 	if !ShouldMonitorDeviceType(deviceFields, entityType) {
 		return fmt.Errorf("no fields to watch for device type: %d", entityType)
 	}

@@ -146,10 +146,12 @@ func (c *DCGMCollector) GetMetrics() (MetricsByCounter, error) {
 
 func ShouldMonitorDeviceType(fields []dcgm.Short, entityType dcgm.Field_Entity_Group) bool {
 	if len(fields) == 0 {
+		logrus.Debugf("no fields")
 		return false
 	}
 
 	if len(fields) == 1 && fields[0] == dcgm.DCGM_FI_DRIVER_VERSION {
+		logrus.Debugf("only driver info")
 		return false
 	}
 
