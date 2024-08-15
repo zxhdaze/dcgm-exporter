@@ -30,8 +30,8 @@ const (
 	MinorKey               = "i" // Monitor sub-level entities: GPU instances/NvLinks/CPUCores - GPUI cannot be specified if MIG is disabled
 	undefinedConfigMapData = "none"
 	deviceUsageTemplate    = `Specify which devices dcgm-exporter monitors.
-	Possible values: {{.FlexKey}} or 
-	                 {{.MajorKey}}[:id1[,-id2...] or 
+	Possible values: {{.FlexKey}} or
+	                 {{.MajorKey}}[:id1[,-id2...] or
 	                 {{.MinorKey}}[:id1[,-id2...].
 	If an id list is used, then devices with match IDs must exist on the system. For example:
 		(default) = monitor all GPU instances in MIG mode, all GPUs if MIG mode is disabled. (See {{.FlexKey}})
@@ -421,6 +421,7 @@ func getFieldEntityGroupTypeSystemInfo(cs *dcgmexporter.CounterSet, config *dcgm
 	fieldEntityGroupTypeSystemInfo := dcgmexporter.NewEntityGroupTypeSystemInfo(allCounters, config)
 
 	for _, egt := range dcgmexporter.FieldEntityGroupTypeToMonitor {
+		logrus.Debugf("Get fieldentity group %s", egt.String())
 		err := fieldEntityGroupTypeSystemInfo.Load(egt)
 		if err != nil {
 			logrus.Infof("Not collecting %s metrics; %s", egt.String(), err)
