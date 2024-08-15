@@ -45,10 +45,13 @@ func NewDeviceFields(counters []Counter, entityType dcgm.Field_Entity_Group) []d
 
 		if meta.EntityLevel == entityType || meta.EntityLevel == dcgm.FE_NONE {
 			deviceFields = append(deviceFields, f.FieldID)
+			logrus.Debugf("Added FieldID: %d", meta.FieldId)
 		} else if entityType == dcgm.FE_GPU && (meta.EntityLevel == dcgm.FE_GPU_CI || meta.EntityLevel == dcgm.FE_GPU_I || meta.EntityLevel == dcgm.FE_VGPU) {
 			deviceFields = append(deviceFields, f.FieldID)
+			logrus.Debugf("Added FieldID: %d", meta.FieldId)
 		} else if entityType == dcgm.FE_CPU && (meta.EntityLevel == dcgm.FE_CPU || meta.EntityLevel == dcgm.FE_CPU_CORE) {
 			deviceFields = append(deviceFields, f.FieldID)
+			logrus.Debugf("Added FieldID: %d", meta.FieldId)
 		}
 	}
 
