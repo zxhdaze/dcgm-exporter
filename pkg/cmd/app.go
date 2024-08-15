@@ -303,7 +303,7 @@ restart:
 	cleanupDCGM := initDCGM(config)
 	defer cleanupDCGM()
 
-	logrus.Info("DCGM successfully initialized!")
+	logrus.Info("DCGM successfully initialized!!!!!!!!!!!!!!")
 
 	dcgm.FieldsInit()
 	defer dcgm.FieldsTerm()
