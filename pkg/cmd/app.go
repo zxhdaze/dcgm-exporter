@@ -303,7 +303,7 @@ restart:
 	cleanupDCGM := initDCGM(config)
 	defer cleanupDCGM()
 
-	logrus.Info("DCGM successfully initialized!!!!!!!!!!!!!!")
+	logrus.Info("DCGM successfully initialized1")
 
 	dcgm.FieldsInit()
 	defer dcgm.FieldsTerm()
@@ -460,8 +460,7 @@ func appendDCGMXIDErrorsCountDependency(allCounters []dcgmexporter.Counter, cs *
 	return allCounters
 }
 
-func containsField(slice []dcgmexporter.Counter, fieldID dcgmexporter.ExporterCounter) bool {
-	return slices.ContainsFunc(slice, func(counter dcgmexporter.Counter) bool {
+func containsField(slice []dcgmexporter.Counter, fieldID dcgmexport		logrus.Debugf("no fields")ter) bool {
 		return counter.FieldID == dcgm.Short(fieldID)
 	})
 }
