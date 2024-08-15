@@ -311,7 +311,8 @@ restart:
 	fillConfigMetricGroups(config)
 
 	cs := getCounters(config)
-
+	logrus.Debugf("fieldEntityGroupTypeSystemInfo")
+	logrus.Info("fieldEntityGroupTypeSystemInfo")
 	fieldEntityGroupTypeSystemInfo := getFieldEntityGroupTypeSystemInfo(cs, config)
 
 	hostname, err := dcgmexporter.GetHostname(config)
@@ -422,6 +423,7 @@ func getFieldEntityGroupTypeSystemInfo(cs *dcgmexporter.CounterSet, config *dcgm
 
 	for _, egt := range dcgmexporter.FieldEntityGroupTypeToMonitor {
 		logrus.Debugf("Get fieldentity group %s", egt.String())
+		logrus.Info("Get fieldentity group ")
 		err := fieldEntityGroupTypeSystemInfo.Load(egt)
 		if err != nil {
 			logrus.Infof("Not collecting %s metrics; %s", egt.String(), err)
