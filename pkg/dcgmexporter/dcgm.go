@@ -42,7 +42,7 @@ func NewDeviceFields(counters []Counter, entityType dcgm.Field_Entity_Group) []d
 	var deviceFields []dcgm.Short
 	for _, f := range counters {
 		meta := dcgm.FieldGetById(f.FieldID)
-
+		logrus.Debugf("MetaLv: %d, EntityType: %d", meta.EntityLevel, entityType)
 		if meta.EntityLevel == entityType || meta.EntityLevel == dcgm.FE_NONE {
 			deviceFields = append(deviceFields, f.FieldID)
 			logrus.Debugf("Added FieldID: %d", meta.FieldId)
