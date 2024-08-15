@@ -460,7 +460,8 @@ func appendDCGMXIDErrorsCountDependency(allCounters []dcgmexporter.Counter, cs *
 	return allCounters
 }
 
-func containsField(slice []dcgmexporter.Counter, fieldID dcgmexport		logrus.Debugf("no fields")ter) bool {
+func containsField(slice []dcgmexporter.Counter, fieldID dcgmexporter.ExporterCounter) bool {
+	return slices.ContainsFunc(slice, func(counter dcgmexporter.Counter) bool {
 		return counter.FieldID == dcgm.Short(fieldID)
 	})
 }
