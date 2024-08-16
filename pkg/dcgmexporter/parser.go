@@ -77,6 +77,7 @@ func GetCounterSet(c *Config) (*CounterSet, error) {
 }
 
 func ReadCSVFile(filename string) ([][]string, error) {
+	logrus.Debugf("Attempting to open file: %s", filename)
 	file, err := os.Open(filename)
 	if err != nil {
 		return nil, err
@@ -87,7 +88,15 @@ func ReadCSVFile(filename string) ([][]string, error) {
 	r := csv.NewReader(file)
 	r.Comment = '#'
 	records, err := r.ReadAll()
+	logrus.Debugf("Successfully read %d records from file: %s", len(records), filename)
 
+	// Optionally log the content of the first few records to avoid excessive output
+	if len(records) > 0 {
+		logrus.Debugf("First record: %v", records[0])
+	}
+	if len(records) > 1 {
+		logrus.Debugf("Second record: %v", records[1])
+	}
 	return records, err
 }
 
