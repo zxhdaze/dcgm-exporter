@@ -319,7 +319,7 @@ restart:
 	if err != nil {
 		return err
 	}
-
+	logrus.Debugf("Number of cd.dcgmcounters: %d", len(cs.DCGMCounters))
 	pipeline, cleanup, err := dcgmexporter.NewMetricsPipeline(config,
 		cs.DCGMCounters,
 		hostname,
@@ -381,6 +381,7 @@ func enableDCGMExpClockEventsCount(cs *dcgmexporter.CounterSet, fieldEntityGroup
 		if !exists {
 			logrus.Fatalf("%s collector cannot be initialized", dcgmexporter.DCGMClockEventsCount.String())
 		}
+		logrus.Debugf("Number of cs counters: %d", len(cs.ExporterCounters))
 		clocksThrottleReasonsCollector, err := dcgmexporter.NewClockEventsCollector(
 			cs.ExporterCounters, hostname, config, item)
 		if err != nil {

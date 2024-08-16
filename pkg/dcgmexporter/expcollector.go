@@ -222,6 +222,7 @@ func newExpCollector(
 	fieldEntityGroupTypeSystemInfo FieldEntityGroupTypeSystemInfoItem,
 ) expCollector {
 	var labelsCounters []Counter
+	logrus.Debugf("Number of non label counters: %d", len(counters))
 	for i := 0; i < len(counters); i++ {
 		if counters[i].PromType == "label" {
 			labelsCounters = append(labelsCounters, counters[i])

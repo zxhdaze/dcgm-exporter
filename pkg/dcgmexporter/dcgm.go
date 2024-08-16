@@ -41,6 +41,7 @@ func NewGroup() (dcgm.GroupHandle, func(), error) {
 func NewDeviceFields(counters []Counter, entityType dcgm.Field_Entity_Group) []dcgm.Short {
 	var deviceFields []dcgm.Short
 	logrus.Debugf("New devices")
+	logrus.Debugf("Number of counters: %d", len(counters))
 	for _, f := range counters {
 		meta := dcgm.FieldGetById(f.FieldID)
 		logrus.Debugf("MetaLv: %d, EntityType: %d", meta.EntityLevel, entityType)
